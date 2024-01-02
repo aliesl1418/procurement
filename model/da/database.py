@@ -1,7 +1,6 @@
 from sqlalchemy import create_engine, and_, or_, between
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database, drop_database
-
 from model.entity import Base
 
 

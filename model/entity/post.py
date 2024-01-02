@@ -13,9 +13,9 @@ class Post(Base):
     image = Column(String(300))
     date_time = Column(DateTime, default=datetime.now())
 
-    likes = relationship("model.entity.like.Like", backref="post")
-    profile = relationship("model.entity.profile.Profile", back_populates="posts")
-    comments = relationship("model.entity.comment.Comment", back_populates="post")
+    # likes = relationship("model.entity.like.Like", backref="post")
+    # profile = relationship("model.entity.profile.Profile", back_populates="post")
+    # comments = relationship("model.entity.comment.Comment", back_populates="post")
 
     def __init__(self, profile, text, image=None):
         self. profile= profile

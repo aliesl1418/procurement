@@ -17,7 +17,7 @@ class Profile(Base):
     password = Column(String(30))
 
 
-    posts = relationship("Post", back_populates="profile")
+    # post = relationship("model.entity.post.Post", back_populates="profile")
 
     def __init__(self, name, family, username, password):
         super().__init__()
@@ -27,5 +27,5 @@ class Profile(Base):
         self.password = password
 
 
-#a = Profile('behnam', 'masoumi', 'behnamlive', 'behnam126')
-#print(a)
+# a = Profile('behnam', 'masoumi', 'behnamlive', 'behnam126')
+# print(a)

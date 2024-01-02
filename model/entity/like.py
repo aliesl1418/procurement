@@ -12,9 +12,9 @@ class Like(Base):
     id = Column(Integer, primary_key=True)
     post_id = Column(Integer, ForeignKey("post_tbl.id"))
     profile_id = Column(Integer, ForeignKey("profile_tbl.id"))
-
-    #post = relationship('model.entity.post.Post', backref="likes")
-    profile = relationship(Profile)
+    #
+    # #post = relationship('model.entity.post.Post', backref="likes")
+    # profile = relationship(Profile)
 
     def __init__(self, post, profile):
         self.post = post
