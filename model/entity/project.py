@@ -16,7 +16,7 @@ class Project(Base):
     email = Column(String(30))
     address = Column(String(200))
 
-    # projectclient_r = relationship("model.entity.projectclient.ProjectClient", back_populates="project_r")
+    projectclient_r = relationship("model.entity.projectclient.ProjectClient", back_populates="project_r")
 
     # producer_classification = relationship("ProducerClassification", back_populates="producer")
 

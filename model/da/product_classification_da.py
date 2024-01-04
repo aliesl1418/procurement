@@ -22,4 +22,6 @@ class ProductClassificationDa(DataBaseManager):
         result = self.session.query(ProductClassification).filter(
             ProductClassification.omniclass_level == omniclass_level).all()
         if result:
-            return result[0]
+            return result
+
+

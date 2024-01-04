@@ -15,8 +15,8 @@ class ProjectClient(Base):
     project_id = Column(Integer, ForeignKey("project_tbl.id"))
 
 
-    # project_r = relationship("Project", back_populates="projectclient_r")
-    # client_r = relationship("Client", back_populates="projectclient_r")
+    project_r = relationship("Project", back_populates="projectclient_r")
+    client_r = relationship("Client", back_populates="projectclient_r")
 
     def __init__(self, client_id,project_id):
         super().__init__()

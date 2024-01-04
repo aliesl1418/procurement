@@ -2,10 +2,10 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from model.entity.base import Base
-from model.da.product_classification_da import ProductClassificationDa
-import pandas as pd
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
+# from model.da.product_classification_da import ProductClassificationDa
+# import pandas as pd
+# from sqlalchemy import create_engine, Column, Integer, String
+# from sqlalchemy.ext.declarative import declarative_base
 
 
 
@@ -34,10 +34,8 @@ class ProductClassification(Base):
 # connection = engine.connect()
 # df = pd.read_csv(r'C:\NLBO\omni.txt', delimiter='\t')
 # df.to_sql('productclassification_tbl', con=engine, if_exists='append',index=False)
-# باید برویم در دیتابیس و مقادیر ستون و کلید اصلی را مشخص کنیم
+# # باید برویم در دیتابیس و مقادیر ستون و کلید اصلی را مشخص کنیم
 
 
 
-da = ProductClassificationDa()
-# x = ProductClassification("20",'ali', 2)
-print(da.find_by_omniclasslevel(2))
+

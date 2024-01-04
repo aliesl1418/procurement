@@ -20,7 +20,7 @@ class Client(Base):
     password = Column(String(30))
 
 
-    # projectclient_r = relationship("model.entity.projectclient.ProjectClient", back_populates="client_r")
+    projectclient_r = relationship("model.entity.projectclient.ProjectClient", back_populates="client_r")
 
     def __init__(self, name, family,phonenumber,email,address , username, password):
         super().__init__()
