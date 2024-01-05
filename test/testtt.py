@@ -1,7 +1,7 @@
 from model.da.projectclient_da import *
 from model.da.client_da import *
 from model.da.project_da import *
-
+from model.da.requiredproduct_da import *
 #
 # da = ProductClassificationDa()
 # x = da.find_by_omniclasslevel(2)
@@ -26,3 +26,10 @@ from model.da.project_da import *
 #     z = ProjectDa()
 #     f = z.find_by_id(Project, row.project_id)
 #     print(f.name)
+
+
+# da = RequiredProductDa()
+# x = da.find_by_project_id(1)
+# print(x[0].count)
+
+

@@ -9,3 +9,8 @@ from model.entity.client import Client
 from model.entity.project import Project
 from model.entity.product_classification import ProductClassification
 from model.entity.projectclient import ProjectClient
+from model.entity.required_product import RequiredProduct
+from model.entity.callprice import CallPrice
+from model.entity.supplier_productclass import SupplierProductClass
+from model.entity.producer_productclass import ProducerProductClass
+from model.entity.supplier_producerproduct import SupplierProducerProduct

@@ -19,8 +19,9 @@ class Producer(Base):
     username = Column(String(30))
     password = Column(String(30))
 
+    callprice_r = relationship("CallPrice", back_populates="producer_r")
+    producerproductclass_r = relationship("ProducerProductClass", back_populates="producer_r")
 
-    # producer_classification = relationship("ProducerClassification", back_populates="producer")
 
     def __init__(self, name, family,phonenumber,email,address , username, password):
         super().__init__()
