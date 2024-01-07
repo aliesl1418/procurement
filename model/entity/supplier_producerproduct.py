@@ -13,7 +13,7 @@ class SupplierProducerProduct(Base):
     __table_args__ = {'extend_existing': True}
 
     id = Column(Integer, primary_key=True)
-    producerproductclass_id = Column(String(50), ForeignKey("producerproductclass_tbl.id"))
+    producerproductclass_id = Column(Integer, ForeignKey("producerproductclass_tbl.id"))
     supplier_id = Column(Integer, ForeignKey("supplier_tbl.id"))
 
     producerproductclass_r = relationship("ProducerProductClass", back_populates="supplierproducerproduct_r")

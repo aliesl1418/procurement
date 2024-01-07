@@ -2,6 +2,8 @@ from model.da.projectclient_da import *
 from model.da.client_da import *
 from model.da.project_da import *
 from model.da.requiredproduct_da import *
+from model.da.callprice_da import CallPriceDa
+
 #
 # da = ProductClassificationDa()
 # x = da.find_by_omniclasslevel(2)
@@ -28,8 +30,15 @@ from model.da.requiredproduct_da import *
 #     print(f.name)
 
 
-# da = RequiredProductDa()
-# x = da.find_by_project_id(1)
-# print(x[0].count)
+# da = CallPriceDa()
+#
+# y = da.find_by_status(True)
+# for row in y:
+#     print(row.id)
+
+# da.find_by_status(CallPrice,False)
+
+
+
 
 

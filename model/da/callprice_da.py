@@ -14,8 +14,15 @@ class CallPriceDa(DataBaseManager):
         result = self.session.query(CallPrice).filter(CallPrice.supplier_r == supplier_id)
         self.session.close()
         return result
+
     def find_by_producer_id(self, producer_id):
         self.make_engine()
         result = self.session.query(CallPrice).filter(CallPrice.producer_id == producer_id)
+        self.session.close()
+        return result
+
+    def find_by_status(self, status):
+        self.make_engine()
+        result = self.session.query(CallPrice).filter(CallPrice.status == status)
         self.session.close()
         return result

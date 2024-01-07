@@ -20,6 +20,7 @@ class DataBaseManager:
             self.session = Session()
 
     def save(self, entity):
+        print("Saving")
         self.make_engine()
         self.session.add(entity)
         self.session.commit()
