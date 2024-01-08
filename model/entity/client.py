@@ -2,6 +2,8 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from model.entity.base import Base
+
+
 # from model.da.client_da import ClientDa
 
 class Client(Base):
@@ -19,10 +21,9 @@ class Client(Base):
     username = Column(String(30))
     password = Column(String(30))
 
+    projectclient_r = relationship("ProjectClient", back_populates="client_r")
 
-    projectclient_r = relationship("model.entity.projectclient.ProjectClient", back_populates="client_r")
-
-    def __init__(self, name, family,phonenumber,email,address , username, password):
+    def __init__(self, name, family, phonenumber, email, address, username, password):
         super().__init__()
         self.name = name
         self.family = family

@@ -1,12 +1,12 @@
 # model/entity/profile.py
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Boolean
 from sqlalchemy.orm import relationship
 from model.entity.base import Base
 
 
 # from model.da.product_classification_da import ProductClassificationDa
 # import pandas as pd
-# from sqlalchemy import create_engine, Column, Integer, String
+# from sqlalchemy import create_engine, Column, Integer, String,Boolean
 # from sqlalchemy.ext.declarative import declarative_base
 
 
@@ -31,15 +31,15 @@ class RequiredProduct(Base):
     ManufacturerFa = Column(String(50))
     Manufacturer = Column(String(30))
     ModelLabel = Column(String(30))
+    status = Column(Boolean)
     description = Column(String(300))
-
 
     projectclient_r = relationship("ProjectClient", back_populates="requiredproduct_r")
     omniclass_code_r = relationship("ProductClassification", back_populates="requiredproduct_r")
     callprice_r = relationship("CallPrice", back_populates="requiredproduct_r")
 
     def __init__(self, projectclient_id, omniclass_code, count, Color, Height, Length, Width, Depth, Thickness,
-                 Material, Weight, ManufacturerFa, Manufacturer, ModelLabel,description):
+                 Material, Weight, ManufacturerFa, Manufacturer, ModelLabel, description=None, status=False):
         super().__init__()
         self.projectclient_id = projectclient_id
         self.omniclass_code = omniclass_code
@@ -56,3 +56,4 @@ class RequiredProduct(Base):
         self.Manufacturer = Manufacturer
         self.ModelLabel = ModelLabel
         self.description = description
+        self.status = status

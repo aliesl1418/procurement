@@ -4,6 +4,15 @@ from model.da.project_da import *
 from model.da.requiredproduct_da import *
 from model.da.callprice_da import CallPriceDa
 
+da = RequiredProductDa()
+# req_product = da.find_by_id(RequiredProduct, 1 )
+# print(req_product)
+# print(req_product.projectclient_r)
+# print(req_product.projectclient_r.client_r)
+# print(req_product.projectclient_r.client_r.family)
+x = da.find_by_project_id(1)
+print(x)
+
 #
 # da = ProductClassificationDa()
 # x = da.find_by_omniclasslevel(2)
@@ -32,9 +41,8 @@ from model.da.callprice_da import CallPriceDa
 
 # da = CallPriceDa()
 #
-# y = da.find_by_status(True)
-# for row in y:
-#     print(row.id)
+# y = da.find_by_id(CallPrice,1)
+# print(y.id)
 
 # da.find_by_status(CallPrice,False)
 

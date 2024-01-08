@@ -11,5 +11,7 @@ Base.metadata.create_all(engine)
 
 df = pd.read_csv(r'C:\NLBO\table.csv')
 #برای اینکه رکوردهای خالی حذف شوند کد زیر را نوشتم
-df = df.dropna()
+df.dropna(inplace=True)
+df['status'] = False
+df['description'] = "Nothing"
 df.to_sql('requiredproduct_tbl', con=engine, if_exists='append', index=False)
