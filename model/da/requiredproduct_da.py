@@ -1,4 +1,3 @@
-
 from model.da.database import *
 from model.entity import *
 
@@ -28,3 +27,21 @@ class RequiredProductDa(DataBaseManager):
         self.make_engine()
         result = self.session.query(RequiredProduct).filter(RequiredProduct.projectclient_id == projectclient_id)
         return result
+
+    def change_status(self, item_id):
+        self.make_engine()
+        entity = self.session.get(RequiredProduct, item_id)
+        if not entity.status:
+            change = RequiredProduct(entity.projectclient_id, entity.omniclass_code, entity.count, entity.Color,
+                                     entity.Height, entity.Length, entity.Width, entity.Depth, entity.Thickness,
+                                     entity.Material, entity.Weight, entity.ManufacturerFa, entity.Manufacturer,
+                                     entity.ModelLabel, status=True,description='Nothing')
+        else:
+            change = RequiredProduct(entity.projectclient_id, entity.omniclass_code, entity.count, entity.Color,
+                                     entity.Height, entity.Length, entity.Width, entity.Depth, entity.Thickness,
+                                     entity.Material, entity.Weight, entity.ManufacturerFa, entity.Manufacturer,
+                                     entity.ModelLabel, status=False,description='Nothing')
+        change.id = entity.id
+        self.session.merge(change)
+        self.session.commit()
+        return change

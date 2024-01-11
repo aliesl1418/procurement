@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+
+{% block title %}
+Profile Page
+{% endblock %}
+
+{% block myStyle%}
+<link rel="stylesheet" href="assets/css/profile.css">
+{% endblock %}
+
+{% block content_title %}
+Profile Page
+{% endblock %}
+
+
+{% block content %}
+
+<form action="/profile" method="post">
+    <div class="profile-input"><label for="nameId">Name</label>
+        <input id="nameId" type="text" name="name" value="{{profile.name}}" class="form-control form-control-user">
+    </div>
+    <div class="profile-input"><label for="familyId">Family</label>
+        <input id="familyId" type="text" name="family" value="{{profile.family}}"
+               class="form-control form-control-user"></div>
+    <div class="profile-input"><label for="usernameId">Username</label>
+        <input id="usernameId" type="text" name="username" value="{{profile.username}}"
+               class="form-control form-control-user"></div>
+    <div class="profile-input"><label for="passwordId">Password</label>
+        <input id="passwordId" type="password" name="password" value="{{profile.password}}"
+               class="form-control form-control-user"></div>
+    <br>
+    <input class="btn btn-primary btn-user btn-block" type="submit" value="Edit">
+</form>
+
+
+{% endblock %}
+
+{% block myScript %}
+<script src="assets/js/profile.js"></script>
+{% endblock %}
+

@@ -1,17 +1,18 @@
+from controller import RequiredProductController
 from model.da.projectclient_da import *
 from model.da.client_da import *
 from model.da.project_da import *
 from model.da.requiredproduct_da import *
 from model.da.callprice_da import CallPriceDa
 
-da = RequiredProductDa()
+# da = RequiredProductDa()
 # req_product = da.find_by_id(RequiredProduct, 1 )
 # print(req_product)
 # print(req_product.projectclient_r)
 # print(req_product.projectclient_r.client_r)
 # print(req_product.projectclient_r.client_r.family)
-x = da.find_by_project_id(1)
-print(x)
+# x = da.find_by_project_id(1)
+# print(x)
 
 #
 # da = ProductClassificationDa()
@@ -46,7 +47,10 @@ print(x)
 
 # da.find_by_status(CallPrice,False)
 
+x = RequiredProductController.status(2)
+print(x)
 
 
-
-
+# da = RequiredProductDa()
+# result = da.find_by_id(RequiredProduct,1)
+# print(result)

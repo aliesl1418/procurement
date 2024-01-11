@@ -2,6 +2,7 @@ from controller.client_controller import ProfileController
 from controller.project_controller import PostController
 from controller.producer_controller import CommentController
 from controller.project_controller import PostController
+from controller.required_product_controller import RequiredProductController
 
 from controller.exception.access_denied_error import AccessDeniedError
 from controller.exception.duplicate_username_error import DuplicateUsernameError

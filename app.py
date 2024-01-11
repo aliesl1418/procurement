@@ -1,9 +1,7 @@
 from flask import Flask, render_template, redirect, request, session
 
-
 from controller.client_controller import ProfileController
 from flask_session import Session
-
 from controller import *
 
 app = Flask(__name__, template_folder="view", static_folder="view/assets")
@@ -12,9 +10,16 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-@app.route("/")
-def home():
-    return render_template("login.html")
+@app.route("/required_product",methods=["POST", "GET"])
+def required():
+    # if not session.get("username"):
+    #     return render_template("login.html")
+    if request.method == "POST":
+        RequiredProductController.status(request.form.get('item_id'))
+    return render_template("required_product.html",products=RequiredProductController.find_by_client_id(1))
+# def status(id):
+#     RequiredProductController.find_by_client_id(1)
+
 
 
 # @app.route("/login", methods=["POST", "GET"])
@@ -30,8 +35,8 @@ def home():
 #         else:
 #             message = data
 #     return render_template("login.html", message=message)
-
-
+#
+#
 # @app.route("/profile", methods=["POST", "GET", "DELETE"])
 # def profile():
 #     if not session.get("username"):
@@ -49,7 +54,7 @@ def home():
 #     # return data, 204
 #     return render_template("profile.html", profile=ProfileController.find_by_username(session.get("username"))[1])
 #
-
+#
 # @app.route("/register", methods=["POST", "GET"])
 # def register():
 #     if request.method == "POST":
@@ -64,8 +69,8 @@ def home():
 #
 #
 #     return render_template("register.html")
-
-
+#
+#
 # @app.route("/post", methods=["POST", "GET"])
 # def post():
 #     if not session.get("username"):
