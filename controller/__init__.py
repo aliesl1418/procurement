@@ -4,9 +4,11 @@ from controller.client_controller import ClientController
 from controller.producer_controller import ProducerController
 from controller.project_controller import ProjectController
 from controller.supplier_controller import SupplierController
+from controller.supplier_producerproduct_controller import SupplierProducerProductController
+from controller.supplier_productclass_controller import SupplierProductClassController
 
 
-from controller.producer_productclass_controller import ProducerProductClassController
+
 
 
 from controller.exception.access_denied_error import AccessDeniedError

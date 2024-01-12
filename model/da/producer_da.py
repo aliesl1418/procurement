@@ -1,4 +1,4 @@
-from model.da.database import DataBaseManager,and_,or_,between
+from model.da.database import DataBaseManager, and_, or_, between
 from model.entity import *
 
 
@@ -15,3 +15,9 @@ class ProducerDa(DataBaseManager):
         result = self.session.query(Producer).filter(Producer.username == username).all()
         if result:
             return result[0]
+
+    def find_id_by_name(self, producer_name):
+        self.make_engine()
+        result = self.session.query(Producer).filter(Producer.name == producer_name).all()
+        if result:
+            return result

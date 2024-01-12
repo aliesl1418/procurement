@@ -1,6 +1,5 @@
 from flask import Flask, render_template, redirect, request, session
 
-from controller.client_controller import ProfileController
 from flask_session import Session
 from controller import *
 

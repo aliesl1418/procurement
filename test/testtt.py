@@ -56,9 +56,10 @@ from controller import *
 # result = da.find_all(RequiredProduct)
 # print(result)
 
-# print(ProducerProductClassController.find_by_producer_id(1))
+# print(ProducerProductClassController.find_by_producer_id(2))
 
 print(RequiredProductController.find_for_producer(2))
+# print(ProducerController.find_by_id(2).name)
 
 # da = RequiredProductDa()
 # x = da.find_by_id(RequiredProduct,4)

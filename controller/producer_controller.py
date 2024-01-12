@@ -1,13 +1,15 @@
 from controller import *
 from model.da import *
 from model.entity import *
+
+
 class ProducerController:
     @classmethod
-    def save(cls, name, family,phonenumber,email,address , username, password):
+    def save(cls, name, family, phonenumber, email, address, username, password):
         try:
             da = ProducerDa()
             if not da.find_by_username(username):
-                producer = Producer(name, family,phonenumber,email,address , username, password)
+                producer = Producer(name, family, phonenumber, email, address, username, password)
                 da.save(producer)
                 return producer
             else:
@@ -17,7 +19,7 @@ class ProducerController:
             return False, str(e)
 
     @classmethod
-    def edit(cls, id, name, family,phonenumber,email,address , username, password):
+    def edit(cls, id, name, family, phonenumber, email, address, username, password):
         try:
             da = ProducerDa()
             producer = Producer(name, family, phonenumber, email, address, username, password)
@@ -74,5 +76,13 @@ class ProducerController:
                 return Producer
             else:
                 raise AccessDeniedError("Wrong username/password")
+        except Exception as e:
+            return False, str(e)
+
+    @classmethod
+    def find_id_by_name(cls, producer_name):
+        try:
+            da = ProducerDa()
+            return da.find_id_by_name(producer_name)
         except Exception as e:
             return False, str(e)
