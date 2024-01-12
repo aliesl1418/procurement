@@ -1,64 +1,80 @@
+from controller import *
 from model.da import *
 from model.entity import *
 
-class PostController:
+
+class ProjectController:
     @classmethod
-    def save(cls, image, text):
+    def save(cls, name, phonenumber, email, address):
         try:
-            da = PostDa()
-            post = Post(text, image)
-            da.save(post)
-            return post
+            da = ProjectDa()
+            if not da.find_by_email(email):
+                project = Project(name, phonenumber, email, address)
+                da.save(project)
+                return project
+            else:
+                raise DuplicateUsernameError("Duplicate Username")
+
         except Exception as e:
             return False, str(e)
 
     @classmethod
-    def edit(cls, id, profile_id, image, text):
+    def edit(cls, id, name, phonenumber, email, address):
         try:
-            da = PostDa()
-            post = Post(text, image)
-            post.id = id
-            post.profile_id = profile_id
-            da.edit(post)
-            return post
+            da = ProjectDa()
+            project = Project(name, phonenumber, email, address)
+            project.id = id
+            da.edit(project)
+            return project
         except Exception as e:
+            e.with_traceback()
             return False, str(e)
 
     @classmethod
     def remove(cls, id):
         try:
-            da = PostDa()
-            post = da.find_by_id(Post, id)
-            if post:
-                da.remove(post)
-                return True
+            da = ProjectDa()
+            project = da.find_by_id(Project, id)
+            return da.remove(project)
         except Exception as e:
             return False, str(e)
 
     @classmethod
-    def find_by_time(cls, datetime1, datetime2):
+    def find_all(cls):
         try:
-            da = PostDa()
-            post_list = da.find_by_time(datetime1, datetime2)
-            return post_list
-        except Exception as e:
-            return False, str(e)
-
-
-    @classmethod
-    def find_by_profile_id(cls, profile_id):
-        try:
-            da = PostDa()
-            post_list = da.find_by_profile_id(profile_id)
-            return post_list
+            da = ProjectDa()
+            return da.find_all(Project)
         except Exception as e:
             return False, str(e)
 
     @classmethod
-    def find_by_profile_username(cls, profile_username):
+    def find_by_id(cls, id):
         try:
-            da = PostDa()
-            post_list = da.find_by_profile_username(profile_username)
-            return post_list
+            da = ProjectDa()
+            project = da.find_by_id(Project, id)
+            if project:
+                return project
+            else:
+                raise NoContentError("There is no project!")
         except Exception as e:
             return False, str(e)
+
+    # @classmethod
+    # def find_by_username(cls, username):
+    #     try:
+    #         da = ClientDa()
+    #         return da.find_by_username(username)
+    #     except Exception as e:
+    #         return False, str(e)
+    #
+    # @classmethod
+    # def login(cls, username, password):
+    #     try:
+    #         da = ClientDa()
+    #         client = da.find_by_username_password(username, password)
+    #         if client:
+    #             return client
+    #         else:
+    #             raise AccessDeniedError("Wrong username/password")
+    #     except Exception as e:
+    #         return False, str(e)

@@ -1,10 +1,11 @@
-from controller import RequiredProductController
+from controller.required_product_controller import RequiredProductController
+from controller.producer_productclass_controller import ProducerProductClassController
 from model.da.projectclient_da import *
 from model.da.client_da import *
 from model.da.project_da import *
 from model.da.requiredproduct_da import *
 from model.da.callprice_da import CallPriceDa
-
+from controller import *
 # da = RequiredProductDa()
 # req_product = da.find_by_id(RequiredProduct, 1 )
 # print(req_product)
@@ -47,10 +48,22 @@ from model.da.callprice_da import CallPriceDa
 
 # da.find_by_status(CallPrice,False)
 
-x = RequiredProductController.status(2)
-print(x)
+# x = RequiredProductController.find_by_status_true()
+# print(x)
 
 
 # da = RequiredProductDa()
-# result = da.find_by_id(RequiredProduct,1)
+# result = da.find_all(RequiredProduct)
 # print(result)
+
+# print(ProducerProductClassController.find_by_producer_id(1))
+
+print(RequiredProductController.find_for_producer(2))
+
+# da = RequiredProductDa()
+# x = da.find_by_id(RequiredProduct,4)
+# print(x.ManufacturerFa)
+
+# ProducerController.save('رستاچوب', 'RAS','09392065637','AESLAMIFARGHJ@GMAIL.COM','AVDFV','SDVADFV','SDVADFV')
+
+# print(ProducerProductClassController.find_by_producer_id(2))

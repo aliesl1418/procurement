@@ -17,6 +17,8 @@ def required():
     if request.method == "POST":
         RequiredProductController.status(request.form.get('item_id'))
     return render_template("required_product.html",products=RequiredProductController.find_by_client_id(1))
+#todo:we should take id in above sentences code for client id
+
 # def status(id):
 #     RequiredProductController.find_by_client_id(1)
 

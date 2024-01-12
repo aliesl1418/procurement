@@ -1,92 +1,78 @@
+from controller import *
 from model.da import *
 from model.entity import *
-
-class CommentController:
-
+class ProducerController:
     @classmethod
-    def save(cls, post, profile):
+    def save(cls, name, family,phonenumber,email,address , username, password):
         try:
-            profile = post(None, profile, post)
-            da = CommentDa()
-            return True, da.save(post)
+            da = ProducerDa()
+            if not da.find_by_username(username):
+                producer = Producer(name, family,phonenumber,email,address , username, password)
+                da.save(producer)
+                return producer
+            else:
+                raise DuplicateUsernameError("Duplicate Username")
+
         except Exception as e:
             return False, str(e)
 
     @classmethod
-    def edit(cls, code, profile, post):
+    def edit(cls, id, name, family,phonenumber,email,address , username, password):
         try:
-          like = Comment(code, profile, post)
-          da = CommentDa()
-          return True, da.edit(profile)
+            da = ProducerDa()
+            producer = Producer(name, family, phonenumber, email, address, username, password)
+            producer.id = id
+            da.edit(producer)
+            return producer
         except Exception as e:
-              return False, str(e)
-
-    @classmethod
-    def remove(cls, code):
-        try:
-            da = CommentDa()
-            return True, da.remove(code)
-        except Exception as e:
+            e.with_traceback()
             return False, str(e)
 
+    @classmethod
+    def remove(cls, id):
+        try:
+            da = ProducerDa()
+            producer = da.find_by_id(Producer, id)
+            return da.remove(producer)
+        except Exception as e:
+            return False, str(e)
 
     @classmethod
     def find_all(cls):
         try:
-            da=CommentDa()
-            return True,da.find_all()
-        except Exception as e:
-            return False,str(e)
-
-
-    @classmethod
-    def find_by_code(cls,code):
-        try:
-            da=CommentDa()
-            return True,da.find_by_code(code)
-        except Exception as e:
-            return False,str(e)
-
-
-    @classmethod
-    def find_by_post(cls,post):
-      try:
-          da=CommentDa()
-          return True,da.find_by_post(post)
-      except Exception as e:
-            return False,str(e)
-
-    @classmethod
-    def find_by_profile(cls, profile):
-      try:
-           da = CommentDa()
-           return True, da.find_by_profile_id(profile)
-      except Exception as e:
-           return False, str(e)
-
-
-    @classmethod
-    def find_by_username(cls, username):
-      try:
-          da = CommentDa()
-          return True, da.find_by_username(username)
-      except Exception as e:
-          return False, str(e)
-
-
-    @classmethod
-    def find_by_time(cls, time):
-        try:
-            da = CommentDa()
-            return True, da.find_by_image(time)
+            da = ProducerDa()
+            return da.find_all(Producer)
         except Exception as e:
             return False, str(e)
 
+    @classmethod
+    def find_by_id(cls, id):
+        try:
+            da = ProducerDa()
+            producer = da.find_by_id(Producer, id)
+            if producer:
+                return producer
+            else:
+                raise NoContentError("There is no profile!")
+        except Exception as e:
+            return False, str(e)
 
     @classmethod
-    def find_by_post_id(cls,postid):
+    def find_by_username(cls, username):
         try:
-            da=CommentDa()
-            return True,da.find_by_podst_id(postid)
+            da = ProducerDa()
+            return da.find_by_username(username)
         except Exception as e:
-            return False,str(e)
+            return False, str(e)
+
+    @classmethod
+    def login(cls, username, password):
+        try:
+            da = ProducerDa()
+            Producer = da.find_by_username_password(username, password)
+            if (Producer):
+                return Producer
+            else:
+                raise AccessDeniedError("Wrong username/password")
+        except Exception as e:
+            return False, str(e)

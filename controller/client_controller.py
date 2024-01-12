@@ -1,17 +1,15 @@
 from controller import *
 from model.da import *
 from model.entity import *
-
-
-class ProfileController:
+class ClientController:
     @classmethod
-    def save(cls, name, family, username, password):
+    def save(cls, name, family,phonenumber,email,address , username, password):
         try:
-            da = ProfileDa()
+            da = ClientDa()
             if not da.find_by_username(username):
-                profile = Profile(name, family, username, password)
-                da.save(profile)
-                return True, profile
+                client = Client(name, family,phonenumber,email,address , username, password)
+                da.save(client)
+                return client
             else:
                 raise DuplicateUsernameError("Duplicate Username")
 
@@ -19,13 +17,13 @@ class ProfileController:
             return False, str(e)
 
     @classmethod
-    def edit(cls, id, name, family, username, password):
+    def edit(cls, id, name, family,phonenumber,email,address , username, password):
         try:
-            da = ProfileDa()
-            profile = Profile(name, family, username, password)
-            profile.id = id
-            da.edit(profile)
-            return True, profile
+            da = ClientDa()
+            client = Client(name, family, phonenumber, email, address, username, password)
+            client.id = id
+            da.edit(client)
+            return client
         except Exception as e:
             e.with_traceback()
             return False, str(e)
@@ -33,27 +31,27 @@ class ProfileController:
     @classmethod
     def remove(cls, id):
         try:
-            da = ProfileDa()
-            profile = da.find_by_id(Profile, id)
-            return True, da.remove(profile)
+            da = ClientDa()
+            client = da.find_by_id(Client, id)
+            return da.remove(client)
         except Exception as e:
             return False, str(e)
 
     @classmethod
     def find_all(cls):
         try:
-            da = ProfileDa()
-            return True, da.find_all(Profile)
+            da = ClientDa()
+            return da.find_all(Client)
         except Exception as e:
             return False, str(e)
 
     @classmethod
     def find_by_id(cls, id):
         try:
-            da = ProfileDa()
-            profile = da.find_by_id(Profile, id)
-            if profile:
-                return True,profile
+            da = ClientDa()
+            client = da.find_by_id(Client, id)
+            if client:
+                return client
             else:
                 raise NoContentError("There is no profile!")
         except Exception as e:
@@ -62,18 +60,18 @@ class ProfileController:
     @classmethod
     def find_by_username(cls, username):
         try:
-            da = ProfileDa()
-            return True, da.find_by_username(username)
+            da = ClientDa()
+            return da.find_by_username(username)
         except Exception as e:
             return False, str(e)
 
     @classmethod
     def login(cls, username, password):
         try:
-            da = ProfileDa()
-            profile = da.find_by_username_password(username, password)
-            if (profile):
-                return True, profile
+            da = ClientDa()
+            client = da.find_by_username_password(username, password)
+            if client:
+                return client
             else:
                 raise AccessDeniedError("Wrong username/password")
         except Exception as e:

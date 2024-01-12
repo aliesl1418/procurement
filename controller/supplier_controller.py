@@ -1,77 +1,78 @@
+from controller import *
 from model.da import *
 from model.entity import *
-
-class LikeController:
+class SupplierController:
     @classmethod
-    def save(cls, post, profile):
+    def save(cls, name, family,phonenumber,email,address , username, password):
         try:
-            person = Post(profile, post)
-            da = LikeDa()
-            return True, da.save(post)
+            da = SupplierDa()
+            if not da.find_by_username(username):
+                supplier = Supplier(name, family,phonenumber,email,address , username, password)
+                da.save(supplier)
+                return supplier
+            else:
+                raise DuplicateUsernameError("Duplicate Username")
+
         except Exception as e:
             return False, str(e)
 
     @classmethod
-    def edit(cls, code, profile, post):
+    def edit(cls, id, name, family,phonenumber,email,address , username, password):
         try:
-            like = Like(code, profile, post)
-            da = LikeDa()
-            return True, da.edit(profile)
+            da = SupplierDa()
+            supplier = Supplier(name, family, phonenumber, email, address, username, password)
+            supplier.id = id
+            da.edit(supplier)
+            return supplier
         except Exception as e:
+            e.with_traceback()
             return False, str(e)
 
     @classmethod
-    def remove(cls, code):
+    def remove(cls, id):
         try:
-            da = LikeDa()
-            return True, da.remove(code)
+            da = SupplierDa()
+            supplier = da.find_by_id(Supplier, id)
+            return da.remove(supplier)
         except Exception as e:
             return False, str(e)
 
     @classmethod
     def find_all(cls):
         try:
-            da = LikeDa()
-            return True, da.find_all()
+            da = SupplierDa()
+            return da.find_all(Supplier)
         except Exception as e:
             return False, str(e)
 
     @classmethod
-    def find_by_code(cls, code):
+    def find_by_id(cls, id):
         try:
-            da = LikeDa()
-            return True, da.find_by_code(code)
-        except Exception as e:
-            return False, str(e)
-
-    @classmethod
-    def find_by_post(cls, post):
-        try:
-            da = LikeDa()
-            return True, da.find_by_post(post)
-        except Exception as e:
-            return False, str(e)
-
-    @classmethod
-    def find_by_profile(cls, profile):
-        try:
-            da = LikeDa()
-            return True, da.find_by_profile_id(profile)
+            da = SupplierDa()
+            supplier = da.find_by_id(Supplier, id)
+            if supplier:
+                return supplier
+            else:
+                raise NoContentError("There is no profile!")
         except Exception as e:
             return False, str(e)
 
     @classmethod
     def find_by_username(cls, username):
         try:
-            da = LikeDa()
-            return True, da.find_by_username(username)
+            da = SupplierDa()
+            return da.find_by_username(username)
         except Exception as e:
             return False, str(e)
 
-
-def find_by_image(cls, image):
-    try:
-        da = LikeDa()
-        return True, da.find_by_image(image)
-    except Exception as e:
-        return False, str(e)
+    @classmethod
+    def login(cls, username, password):
+        try:
+            da = SupplierDa()
+            supplier = da.find_by_username_password(username, password)
+            if supplier:
+                return supplier
+            else:
+                raise AccessDeniedError("Wrong username/password")
+        except Exception as e:
+            return False, str(e)

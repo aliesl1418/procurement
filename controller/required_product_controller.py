@@ -1,6 +1,8 @@
 from model.da import *
 from model.entity import *
-
+from controller.producer_controller import ProducerController
+from controller.supplier_controller import SupplierController
+from controller.producer_productclass_controller import ProducerProductClassController
 
 class RequiredProductController:
     @classmethod
@@ -28,6 +30,7 @@ class RequiredProductController:
             return True, da.edit(products)
         except Exception as e:
             return False, str(e)
+
     @classmethod
     def find_by_client_id(cls, client_id):
         try:
@@ -45,58 +48,64 @@ class RequiredProductController:
             return result
         except Exception as e:
             return False, str(e)
-#     @classmethod
-#     def remove(cls, code):
-#         try:
-#             da = LikeDa()
-#             return True, da.remove(code)
-#         except Exception as e:
-#             return False, str(e)
-#
-#     @classmethod
-#     def find_all(cls):
-#         try:
-#             da = LikeDa()
-#             return True, da.find_all()
-#         except Exception as e:
-#             return False, str(e)
-#
-#     @classmethod
-#     def find_by_code(cls, code):
-#         try:
-#             da = LikeDa()
-#             return True, da.find_by_code(code)
-#         except Exception as e:
-#             return False, str(e)
-#
-#     @classmethod
-#     def find_by_post(cls, post):
-#         try:
-#             da = LikeDa()
-#             return True, da.find_by_post(post)
-#         except Exception as e:
-#             return False, str(e)
-#
-#     @classmethod
-#     def find_by_profile(cls, profile):
-#         try:
-#             da = LikeDa()
-#             return True, da.find_by_profile_id(profile)
-#         except Exception as e:
-#             return False, str(e)
-#
-#     @classmethod
-#     def find_by_username(cls, username):
-#         try:
-#             da = LikeDa()
-#             return True, da.find_by_username(username)
-#         except Exception as e:
-#             return False, str(e)
-#
-#
-# def find_by_image(cls, image):
-#     try:
-#         da = LikeDa()
-#         return True, da.find_by_image(image)
-#     except Exception as e:
-#         return False, str(e)
+
+    @classmethod
+    def find_by_status_true(cls):
+        try:
+            da = RequiredProductDa()
+            result = da.find_all(RequiredProduct)
+            obj = []
+            for product in result:
+                if product.status:
+                    obj.append(product)
+            return obj
+        except Exception as e:
+            return False, str(e)
+
+    @classmethod
+    def find_for_producer(cls,producer_id):
+        try:
+            result = cls.find_by_status_true()
+            produce = ProducerController.find_by_id(producer_id)
+            list = ProducerProductClassController.find_by_producer_id(producer_id)
+            if list:
+               product_produ = [xz.omniclass_code for xz in list]
+            else:
+                product_produ = []
+            obj = []
+            for product in result:
+                if product.ManufacturerFa == produce.name:
+                    obj.append(product)
+            for product in result:
+                if product.ManufacturerFa == "N/A" or product.ManufacturerFa is None:
+                    if product.omniclass_code in product_produ:
+                        obj.append(product)
+            return obj
+        except Exception as e:
+            e.with_traceback()
+            return False, str(e)
+
+    @classmethod
+    def find_for_supplier(cls,supplier_id):
+        try:
+            result = cls.find_by_status_true()
+            result = da.find_all(RequiredProduct)
+            produce = ProducerController.find_by_id(supplier_id)
+            list = ProducerProductClassController.find_by_producer_id(producer_id)
+            if list:
+               product_produ = [xz.omniclass_code for xz in list]
+            else:
+                product_produ = []
+            obj = []
+            for product in result:
+                if product.ManufacturerFa == produce.name:
+                    obj.append(product)
+            for product in result:
+                if product.ManufacturerFa == "N/A" or product.ManufacturerFa is None:
+                    if product.omniclass_code in product_produ:
+                        obj.append(product)
+            return obj
+        except Exception as e:
+            e.with_traceback()
+            return False, str(e)
+
