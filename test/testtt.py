@@ -58,7 +58,7 @@ from controller import *
 
 # print(ProducerProductClassController.find_by_producer_id(2))
 
-print(RequiredProductController.find_for_producer(2))
+# print(RequiredProductController.find_for_producer(2))
 # print(ProducerController.find_by_id(2).name)
 
 # da = RequiredProductDa()
@@ -68,3 +68,5 @@ print(RequiredProductController.find_for_producer(2))
 # ProducerController.save('رستاچوب', 'RAS','09392065637','AESLAMIFARGHJ@GMAIL.COM','AVDFV','SDVADFV','SDVADFV')
 
 # print(ProducerProductClassController.find_by_producer_id(2))
+
+print(RequiredProductController.find_by_projectclient_id(1))

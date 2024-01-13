@@ -19,13 +19,13 @@ class RequiredProductDa(DataBaseManager):
 
     def find_by_omniclasscode(self, omniclass_code):
         self.make_engine()
-        result = self.session.query(RequiredProduct).filter(RequiredProduct.omniclass_code == omniclass_code)
+        result = self.session.query(RequiredProduct).filter(RequiredProduct.omniclass_code == omniclass_code).all()
         self.session.close()
         return result
 
     def find_by_projectclient_id(self, projectclient_id):
         self.make_engine()
-        result = self.session.query(RequiredProduct).filter(RequiredProduct.projectclient_id == projectclient_id)
+        result = self.session.query(RequiredProduct).filter(RequiredProduct.projectclient_id == projectclient_id).all()
         return result
 
     def change_status(self, item_id):

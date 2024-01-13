@@ -23,19 +23,19 @@ def required():
 
 
 
-# @app.route("/login", methods=["POST", "GET"])
-# def login():
-#     message = ""
-#     if request.method == "POST":
-#         username = request.form.get("username")
-#         password = request.form.get("password")
-#         status, data = ProfileController.login(username, password)
-#         if status:
-#             session["username"] = username
-#             return render_template("profile.html", profile=data)
-#         else:
-#             message = data
-#     return render_template("login.html", message=message)
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    message = ""
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        status, data = ProfileController.login(username, password)
+        if status:
+            session["username"] = username
+            return render_template("profile.html", profile=data)
+        else:
+            message = data
+    return render_template("login.html", message=message)
 #
 #
 # @app.route("/profile", methods=["POST", "GET", "DELETE"])
@@ -56,20 +56,20 @@ def required():
 #     return render_template("profile.html", profile=ProfileController.find_by_username(session.get("username"))[1])
 #
 #
-# @app.route("/register", methods=["POST", "GET"])
-# def register():
-#     if request.method == "POST":
-#         # if request.form.get("password") == request.form.get("repeat_password"):
-#
-#         status, data = ProfileController.save(
-#             request.form.get("name"),
-#             request.form.get("family"),
-#             request.form.get("email"),
-#             request.form.get("password"))
-#         return render_template("login.html")
-#
-#
-#     return render_template("register.html")
+@app.route("/register", methods=["POST", "GET"])
+def register():
+    if request.method == "POST":
+        # if request.form.get("password") == request.form.get("repeat_password"):
+
+        status, data = ProfileController.save(
+            request.form.get("name"),
+            request.form.get("family"),
+            request.form.get("email"),
+            request.form.get("password"))
+        return render_template("login.html")
+
+
+    return render_template("register.html")
 #
 #
 # @app.route("/post", methods=["POST", "GET"])

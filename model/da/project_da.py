@@ -5,7 +5,7 @@ from model.entity import *
 class ProjectDa(DataBaseManager):
     def find_by_email(self, email):
         self.make_engine()
-        result = self.session.query(Project).filter(Project.email == email)
+        result = self.session.query(Project).filter(Project.email == email).all()
         self.session.close()
         return result
 

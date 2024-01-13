@@ -1,3 +1,5 @@
+from controller.supplier_productclass_controller import SupplierProductClassController
+from controller.supplier_producerproduct_controller import SupplierProducerProductController
 from model.da import *
 from model.entity import *
 from controller.producer_controller import ProducerController
@@ -91,20 +93,41 @@ class RequiredProductController:
         try:
             result = cls.find_by_status_true()
             producer = ProducerController.find_all()
-            list = SupplierProductClassDa.find_by_supplier_id(supplier_id)
+            list = SupplierProductClassController.find_by_supplier_id(supplier_id)
             if list:
                 supplier_produ = [xz.omniclass_code for xz in list]
             else:
                 supplier_produ = []
             obj = []
             for product in result:
-                if product.ManufacturerFa in [produce.name for produce in producer]:
+                if (product.ManufacturerFa in [produce.name for produce in producer]) and \
+                        (SupplierProducerProductController.find_by_producer_name_and_omniclass_code(
+                            product.ManufacturerFa, product.omniclass_code)):
                     obj.append(product)
             for product in result:
-                if (product.ManufacturerFa == "N/A" or product.ManufacturerFa is None) and \
-                        (product.omniclass_code in supplier_produ):
+                if (product.ManufacturerFa == "N/A" or product.ManufacturerFa is None or
+                    product.ManufacturerFa not in [produce.name for produce in producer]) and \
+                        product.omniclass_code in supplier_produ:
                     obj.append(product)
             return obj
         except Exception as e:
             e.with_traceback()
+            return False, str(e)
+
+    @classmethod
+    def find_by_projectclient_id(cls, projectclient_id):
+        try:
+            da = RequiredProductDa()
+            result = da.find_by_projectclient_id(projectclient_id)
+            return result
+        except Exception as e:
+            return False, str(e)
+
+    @classmethod
+    def find_by_project_id(cls, project_id):
+        try:
+            da = RequiredProductDa()
+            result = da.find_by_project_id(project_id)
+            return result
+        except Exception as e:
             return False, str(e)

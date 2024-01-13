@@ -12,7 +12,7 @@ class CallPrice(Base):
 
     id = Column(Integer, primary_key=True)
     requiredproduct_id = Column(Integer, ForeignKey("requiredproduct_tbl.id"))
-    suppliar_id = Column(Integer, ForeignKey("supplier_tbl.id"))
+    supplier_id = Column(Integer, ForeignKey("supplier_tbl.id"))
     producer_id = Column(Integer, ForeignKey("producer_tbl.id"))
     timeofcallprice = Column(DateTime, default=datetime.now())
     u_price = Column(Float)
@@ -24,10 +24,10 @@ class CallPrice(Base):
     supplier_r = relationship("Supplier", back_populates="callprice_r")
     producer_r = relationship("Producer", back_populates="callprice_r")
 
-    def __init__(self, requiredproduct_id, u_price, t_price, status=False, description=None, suppliar_id=None,
+    def __init__(self, requiredproduct_id, u_price, t_price, status=False, description=None, supplier_id=None,
                  producer_id=None):
         self.requiredproduct_id = requiredproduct_id
-        self.suppliar_id = suppliar_id
+        self.supplier_id = supplier_id
         self.producer_id = producer_id
         self.u_price = u_price
         self.t_price = t_price

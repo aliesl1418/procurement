@@ -1,13 +1,15 @@
 from controller import *
 from model.da import *
 from model.entity import *
+
+
 class ClientController:
     @classmethod
-    def save(cls, name, family,phonenumber,email,address , username, password):
+    def save(cls, name, family, phonenumber, email, address, username, password):
         try:
             da = ClientDa()
             if not da.find_by_username(username):
-                client = Client(name, family,phonenumber,email,address , username, password)
+                client = Client(name, family, phonenumber, email, address, username, password)
                 da.save(client)
                 return client
             else:
@@ -17,7 +19,7 @@ class ClientController:
             return False, str(e)
 
     @classmethod
-    def edit(cls, id, name, family,phonenumber,email,address , username, password):
+    def edit(cls, id, name, family, phonenumber, email, address, username, password):
         try:
             da = ClientDa()
             client = Client(name, family, phonenumber, email, address, username, password)

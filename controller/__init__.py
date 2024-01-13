@@ -6,6 +6,8 @@ from controller.project_controller import ProjectController
 from controller.supplier_controller import SupplierController
 from controller.supplier_producerproduct_controller import SupplierProducerProductController
 from controller.supplier_productclass_controller import SupplierProductClassController
+from controller.call_price_controller import CallPriceController
+from controller.project_client_controller import ProjectClientController
 
 
 
