@@ -18,11 +18,11 @@ class SupplierProducerProductDa(DataBaseManager):
         self.session.close()
         return result
 
-    def find_by_producer_name_and_omniclass_code(self, producer_name, omniclass_code):
+    def find_by_producer_name_and_omniclass_code(self, producer_name, omniclass_code, supplier_id):
         self.make_engine()
         result = self.session.query(SupplierProducerProduct).join(SupplierProducerProduct.producerproductclass_r). \
             join(ProducerProductClass.producer_r). \
-            filter(and_(Producer.name == producer_name, ProducerProductClass.omniclass_code == omniclass_code)).all()
+            filter(and_(Producer.name == producer_name, ProducerProductClass.omniclass_code == omniclass_code,
+                        SupplierProducerProduct.supplier_id == supplier_id)).all()
         self.session.close()
         return result
-

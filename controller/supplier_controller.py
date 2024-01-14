@@ -1,13 +1,15 @@
 from controller import *
 from model.da import *
 from model.entity import *
+
+
 class SupplierController:
     @classmethod
-    def save(cls, name, family,phonenumber,email,address , username, password):
+    def save(cls, name, family, phonenumber, email, address, username, password):
         try:
             da = SupplierDa()
             if not da.find_by_username(username):
-                supplier = Supplier(name, family,phonenumber,email,address , username, password)
+                supplier = Supplier(name, family, phonenumber, email, address, username, password)
                 da.save(supplier)
                 return supplier
             else:
@@ -17,7 +19,7 @@ class SupplierController:
             return False, str(e)
 
     @classmethod
-    def edit(cls, id, name, family,phonenumber,email,address , username, password):
+    def edit(cls, id, name, family, phonenumber, email, address, username, password):
         try:
             da = SupplierDa()
             supplier = Supplier(name, family, phonenumber, email, address, username, password)

@@ -3,11 +3,11 @@ from model.da import *
 from model.entity import *
 class CallPriceController:
     @classmethod
-    def save_supplier(cls, requiredproduct_id, u_price, t_price, supplier_id):
+    def save_supplier(cls, requiredproduct_id, u_price, t_price, supplier_id,description):
         try:
             da = CallPriceDa()
             if not da.find_unique_for_supplier(requiredproduct_id,supplier_id):
-                callprice = CallPrice(requiredproduct_id, u_price, t_price, supplier_id=supplier_id)
+                callprice = CallPrice(requiredproduct_id, u_price, t_price, supplier_id=supplier_id,description=description)
                 da.save(callprice)
                 return callprice
             else:

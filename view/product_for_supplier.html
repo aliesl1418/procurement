@@ -9,20 +9,21 @@ Products
 {% endblock %}
 
 {% block content_title %}
-Products
+Products for pricing
 {% endblock %}
 
 
 {% block content %}
-
 <div class="row">
     <div class="col-8">
-        <h3>products</h3>
+
         <table class="table table-primary table-hover">
             <thead class = 'fa-book-font'>
             <tr>
+
                 <th style="text-align:center;">آیدی</th>
                 <th style="text-align:center;">شناسه پروژه/کارفرما</th>
+                <th style="text-align:center;">اعلام قیمت</th>
                 <th style="text-align:center;">کد مخصوص محصول</th>
                 <th style="text-align:center;">تعداد</th>
                 <th style="text-align:center;">رنگ</th>
@@ -37,14 +38,20 @@ Products
                 <th style="text-align:center;">نام تولیدکننده(انگلیسی)</th>
                 <th style="text-align:center;">مدل محصول</th>
                 <th style="text-align:center;">توضیحات</th>
-                <th style="text-align:center;">استعلام خواهی</th>
-                <th style="text-align:center;">وضعیت استعلام</th>
+
             </thead>
             <tbody>
 
             {% for product in products %}
+
                 <td style="text-align:center;">{{ product.id }}</td>
                 <td style="text-align:center;">{{ product.projectclient_id }}</td>
+                <td style="text-align:center;">
+                    <form method="GET">
+                        <input type="hidden" name="item_id" value="{{ product.id }}">
+                        <input type="submit" value="Pricing" class="btn btn-primary">
+                    </form>
+                </td>
                 <td style="text-align:center;">{{ product.omniclass_code }}</td>
                 <td style="text-align:center;">{{ product.count }}</td>
                 <td style="text-align:center;">{{ product.Color }}</td>
@@ -59,15 +66,7 @@ Products
                 <td style="text-align:center;">{{ product.Manufacturer }}</td>
                 <td style="text-align:center;">{{ product.ModelLabel }}</td>
                 <td style="text-align:center;">{{ product.description }}</td>
-                <td style="text-align:center;">
-                    <form method="POST">
-                        <input type="hidden" name="item_id" value="{{ product.id }}">
-                        <input type="submit" value="استعلام" class="btn btn-primary">
-                    </form>
-                </td>
-                <td style="text-align:center;">
-                    <input type="checkbox" class="form-check-input" {{ 'checked' if product.status else '' }} disabled>
-                </td>
+
 
                 </td>
             </tr>
@@ -76,6 +75,20 @@ Products
         </table>
     </div>
 </div>
+    <br>
+<form action="/product_for_supplier" method="post">
+    <div class="col-sm-6 mb-3 mb-sm-0"><label for="required_product_Id">Required Product Id</label>
+        <input id="required_product_Id" type="text" name="name" value="{{data.id}}" class="form-control form-control-user" readonly>
+    </div>
+    <div class="col-sm-6 mb-3 mb-sm-0"><label for="u_priceId">Unit Price</label>
+        <input id="u_priceId" type="text" name="u_price" class="form-control form-control-user"></div>
+    <div class="col-sm-6 mb-3 mb-sm-0"><label for="t_priceId">Total Price</label>
+        <input id="t_priceId" type="text" name="t_price" class="form-control form-control-user"></div>
+    <div class="profile-input"><label for="descriptionId">Description</label>
+        <input id="descriptionId" type="text" name="description" class="form-control form-control-user"></div>
+    <br>
+    <input class="btn btn-primary btn-user btn-block" type="submit" value="registered">
+</form>
 {% endblock %}
 
 {% block myScript %}

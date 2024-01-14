@@ -66,10 +66,10 @@ class SupplierProducerProductController:
             return False, str(e)
 
     @classmethod
-    def find_by_producer_name_and_omniclass_code(cls, producer_name, omniclass_code):
+    def find_by_producer_name_and_omniclass_code(cls, producer_name, omniclass_code,supplier_id):
         try:
             da = SupplierProducerProductDa()
-            result = da.find_by_producer_name_and_omniclass_code(producer_name, omniclass_code)
+            result = da.find_by_producer_name_and_omniclass_code(producer_name, omniclass_code,supplier_id)
             if result:
                 return result
         except Exception as e:

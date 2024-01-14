@@ -6,6 +6,7 @@ from model.da.project_da import *
 from model.da.requiredproduct_da import *
 from model.da.callprice_da import CallPriceDa
 from controller import *
+
 # da = RequiredProductDa()
 # req_product = da.find_by_id(RequiredProduct, 1 )
 # print(req_product)
@@ -69,4 +70,9 @@ from controller import *
 
 # print(ProducerProductClassController.find_by_producer_id(2))
 
-print(RequiredProductController.find_by_projectclient_id(1))
+# print(RequiredProductController.find_by_projectclient_id(1))
+# print(ProducerController.save('name', 'family', 'phonenumber', 'email', 'address', 'username', 'password'))
+# print(ProducerController.save('yagane', 'eslamifar', '09102955402', 'aeslamifarghj@gmail.com', 'iran,tehran', 'yeganeesl',
+#                             '2f2a1376')
+print(RequiredProductController.find_by_id(1))
+# print(CallPriceController.save_supplier(1,1000,4000,1,"سلام"))

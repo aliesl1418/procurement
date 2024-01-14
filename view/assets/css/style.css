@@ -342,3 +342,7 @@ a{
 /*background-color: rgb(161, 182, 253, 0.825);*/
 /*	padding: 20px 20px 20px 20px;*/
 /*}*/
+
+select {
+  padding-left: 10px;
+}

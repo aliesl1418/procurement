@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SocialMedia - Register</title>
+    <title>NLBO_Procurement - Register</title>
 
     <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css"
     etag="abcdefg">
@@ -18,6 +18,15 @@
 
     <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css"
     etag="abcdefg">
+
+    <link rel="stylesheet"
+          href="assets/css/bootstrap/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="assets/css/bootstrap/bootstrap.min.css">
+
+    <link rel="stylesheet"
+          href="assets/css/style.css">
 </head>
 
 <body class="bg-gradient-primary">
@@ -32,7 +41,7 @@
                     <div class="col-lg-6">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account</h1>
                             </div>
                             <form class="/register" method="post">
                                 <div class="form-group row">
@@ -44,7 +53,11 @@
                                         <input type="text" class="form-control form-control-user" id="exampleLastName"
                                             placeholder="Last Name" name="family">
                                     </div>
-
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-user" id="exampleInputphonenumber"
+                                        placeholder="Phone number" name="phonenumber">
                                 </div>
                                 <br>
                                 <div class="form-group">
@@ -52,14 +65,28 @@
                                         placeholder="Email Address" name="email">
                                 </div>
                                 <br>
-                                <div class="form-group row">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="exampleInputaddress"
+                                        placeholder="Address" name="address">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="exampleInputusername"
+                                        placeholder="Username" name="username">
+                                </div>
+                                <br>
+                                <div class="form-group">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Password" name="password">
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password" name="repeat_password">
+                                    <br>
+                                    <div class="form-group">
+                                    <select name="option">
+                                        <option value='supplier'>1. supplier</option>
+                                        <option value='producer'>2. producer</option>
+                                        <option value='client'>3. client</option>
+                                    </select>
                                     </div>
                                 </div>
                                 <br>

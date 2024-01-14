@@ -102,7 +102,7 @@ class RequiredProductController:
             for product in result:
                 if (product.ManufacturerFa in [produce.name for produce in producer]) and \
                         (SupplierProducerProductController.find_by_producer_name_and_omniclass_code(
-                            product.ManufacturerFa, product.omniclass_code)):
+                            product.ManufacturerFa, product.omniclass_code, supplier_id)):
                     obj.append(product)
             for product in result:
                 if (product.ManufacturerFa == "N/A" or product.ManufacturerFa is None or
@@ -128,6 +128,15 @@ class RequiredProductController:
         try:
             da = RequiredProductDa()
             result = da.find_by_project_id(project_id)
+            return result
+        except Exception as e:
+            return False, str(e)
+
+    @classmethod
+    def find_by_id(cls, id):
+        try:
+            da = RequiredProductDa()
+            result = da.find_by_id(RequiredProduct, id)
             return result
         except Exception as e:
             return False, str(e)
