@@ -11,7 +11,7 @@ class CallPriceDa(DataBaseManager):
 
     def find_by_supplier_id(self, supplier_id):
         self.make_engine()
-        result = self.session.query(CallPrice).filter(CallPrice.supplier_r == supplier_id).all()
+        result = self.session.query(CallPrice).filter(CallPrice.supplier_id == supplier_id).all()
         self.session.close()
         return result
 
@@ -52,9 +52,11 @@ class CallPriceDa(DataBaseManager):
         self.make_engine()
         entity = self.session.get(CallPrice, item_id)
         if not entity.status:
-            change = CallPrice(entity.requiredproduct_id, entity.u_price, entity.t_price, status=True)
+            change = CallPrice(entity.requiredproduct_id, entity.u_price, entity.t_price, status=True,
+                               supplier_id=entity.supplier_id,description=entity.description,producer_id=entity.producer_id)
         else:
-            change = CallPrice(entity.requiredproduct_id, entity.u_price, entity.t_price, status=False)
+            change = CallPrice(entity.requiredproduct_id, entity.u_price, entity.t_price, status=False,
+                               supplier_id=entity.supplier_id,description=entity.description,producer_id=entity.producer_id)
         change.id = entity.id
         self.session.merge(change)
         self.session.commit()

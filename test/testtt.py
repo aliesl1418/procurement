@@ -74,5 +74,11 @@ from controller import *
 # print(ProducerController.save('name', 'family', 'phonenumber', 'email', 'address', 'username', 'password'))
 # print(ProducerController.save('yagane', 'eslamifar', '09102955402', 'aeslamifarghj@gmail.com', 'iran,tehran', 'yeganeesl',
 #                             '2f2a1376')
-print(RequiredProductController.find_by_id(1))
+# print(RequiredProductController.find_by_id(1))
 # print(CallPriceController.save_supplier(1,1000,4000,1,"سلام"))
+# #todo json bug
+# print(CallPriceController.find_by_supplier_id(3))
+
+# print(CallPriceController.find_callprice_for_client(3).supplier_r.name)
+print(RequiredProductController.find_for_producer(6))
+# print(CallPriceController.save_producer(1, 1000, 100000, 6, 'SGHSRTH'))
