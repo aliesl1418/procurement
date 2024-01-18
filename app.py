@@ -1,8 +1,9 @@
 from flask import Flask, render_template, redirect, request, session, jsonify
-
+import os
 from flask_session import Session
 from controller import *
 from model.entity import CallPrice
+from model.entity.loadproduct import load
 
 app = Flask(__name__, template_folder="view", static_folder="view/assets")
 app.config["SESSION_PERMANENT"] = False
@@ -19,10 +20,16 @@ def home():
 def required():
     if not (session.get('id') and session.get('type')):
         return render_template("login.html")
+    if request.method == "GET":
+        load()
+        return render_template("required_product.html",
+                               products=RequiredProductController.find_by_client_id(session.get('id')))
     if request.method == "POST":
         RequiredProductController.status(request.form.get('item_id'))
     return render_template("required_product.html",
                            products=RequiredProductController.find_by_client_id(session.get('id')))
+
+
 @app.route("/callprice_for_client", methods=["POST", "GET"])
 def callprice_client():
     if not (session.get('id') and session.get('type')):
@@ -80,7 +87,7 @@ def order_supplier():
             requiredproduct_id = session.get('item_id').requiredproduct_id
             supplier_id = session.get('id')
             id = session.get('item_id').id
-            CallPriceController.edit(id, requiredproduct_id, u_price, t_price, description,supplier_id)
+            CallPriceController.edit(id, requiredproduct_id, u_price, t_price, description, supplier_id)
             session['item_id'] = None
             return render_template("order_for_supplier.html",
                                    products=CallPriceController.find_by_supplier_id(session.get('id')),
@@ -93,7 +100,6 @@ def order_supplier():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    message = ""
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -114,6 +120,8 @@ def login():
                 session['id'] = data.id
                 session['type'] = 'client'
                 return render_template('profile_client.html', profile=data)
+
+
 @app.route("/product_for_producer", methods=["POST", "GET"])
 def product_for_producer():
     if not (session.get('id') and session.get('type')):
@@ -138,20 +146,20 @@ def product_for_producer():
             return render_template("product_for_producer.html",
                                    products=RequiredProductController.find_for_producer(session.get('id')),
                                    data=session.get('item_id'))
-#todo have bug
+    # todo have bug
     return render_template("product_for_producer.html",
                            products=RequiredProductController.find_for_producer(session.get('id')),
                            data=session.get('item_id'))
 
 
-@app.route("/order_for_supplier", methods=["POST", "GET"])
+@app.route("/order_for_producer", methods=["POST", "GET"])
 def order_producer():
     if not (session.get('id') and session.get('type')):
         return render_template("login.html")
     if request.method == "GET":
         session['item_id'] = CallPriceController.find_by_id(request.args.get('item_id'))
-        return render_template("order_for_supplier.html",
-                               products=CallPriceController.find_by_supplier_id(session.get('id')),
+        return render_template("order_for_producer.html",
+                               products=CallPriceController.find_by_producer_id(session.get('id')),
                                data=session.get('item_id'))
 
     if request.method == "POST":
@@ -160,18 +168,17 @@ def order_producer():
             t_price = request.form.get("t_price")
             description = request.form.get("description")
             requiredproduct_id = session.get('item_id').requiredproduct_id
-            supplier_id = session.get('id')
+            producer_id = session.get('id')
             id = session.get('item_id').id
-            CallPriceController.edit(id, requiredproduct_id, u_price, t_price, description,supplier_id)
+            CallPriceController.edit_for_roducer(id, requiredproduct_id, u_price, t_price, description, producer_id)
             session['item_id'] = None
-            return render_template("order_for_supplier.html",
-                                   products=CallPriceController.find_by_supplier_id(session.get('id')),
+            return render_template("order_for_producer.html",
+                                   products=CallPriceController.find_by_producer_id(session.get('id')),
                                    data=session.get('item_id'))
 
-    return render_template("order_for_supplier.html",
-                           products=CallPriceController.find_by_supplier_id(session.get('id')),
+    return render_template("order_for_producer.html",
+                           products=CallPriceController.find_by_producer_id(session.get('id')),
                            data=session.get('item_id'))
-
 
 
 @app.route("/profile", methods=["POST", "GET", "DELETE"])
@@ -204,7 +211,7 @@ def profile():
                 password = request.form.get("password")
                 data = ProducerController.edit(session.get("id"), name, family, phonenumber, email, address, username,
                                                password)
-                return render_template("profile.html", profile=data)
+                return render_template("profile_producer.html", profile=data)
             return render_template("profile_producer.html", profile=ProducerController.find_by_id(session.get("id")))
         case 'client':
             if request.method == "POST":
@@ -252,15 +259,7 @@ def register():
 
 #
 #
-# @app.route("/post", methods=["POST", "GET"])
-# def post():
-#     if not session.get("username"):
-#         return render_template("login.html")
-#     if request.method == "POST":
-#         pass
-#     return render_template("post.html", posts=ProfileController.find_by_username(session.get("username"))[1].posts)
-#
-#
+
 # @app.route("/forget")
 # def forget():
 #     return render_template("forget-password.html")

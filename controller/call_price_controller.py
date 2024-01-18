@@ -46,7 +46,18 @@ class CallPriceController:
         except Exception as e:
             e.with_traceback()
             return False, str(e)
-
+    @classmethod
+    def edit_for_producer(cls, id, requiredproduct_id, u_price, t_price, description, producer_id):
+        try:
+            da = CallPriceDa()
+            callprice = CallPrice(requiredproduct_id, u_price, t_price, description=description,
+                                  producer_id=producer_id)
+            callprice.id = id
+            da.edit(callprice)
+            return callprice
+        except Exception as e:
+            e.with_traceback()
+            return False, str(e)
     @classmethod
     def edit_status(cls, item_id):
         try:

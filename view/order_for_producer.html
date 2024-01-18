@@ -1,0 +1,80 @@
+{% extends "template_producer.html" %}
+
+{% block title %}
+Products
+{% endblock %}
+
+{% block myStyle%}
+<link rel="stylesheet" href="assets/css/post.css">
+{% endblock %}
+
+{% block content_title %}
+Order
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-8">
+
+        <table class="table table-primary table-hover">
+            <thead class = 'fa-book-font'>
+            <tr>
+
+                <th style="text-align:center;">Id</th>
+                <th style="text-align:center;">requiredproduct_id</th>
+                <th style="text-align:center;">Order status</th>
+                <th style="text-align:center;">Edit</th>
+                <th style="text-align:center;">Time of order</th>
+                <th style="text-align:center;">Unit price</th>
+                <th style="text-align:center;">Total price</th>
+                <th style="text-align:center;">Description</th>
+
+            </thead>
+            <tbody>
+
+            {% for product in products %}
+
+                <td style="text-align:center;">{{ product.id }}</td>
+                <td style="text-align:center;">{{ product.requiredproduct_id}}</td>
+                <td style="text-align:center;">
+                    <input type="checkbox" class="form-check-input" {{ 'checked' if product.status else '' }} disabled>
+                </td>
+                <td style="text-align:center;">
+                    <form method="GET">
+                        <input type="hidden" name="item_id" value="{{ product.id }}">
+                        <input type="submit" value="Edit" class="btn btn-primary">
+                    </form>
+                </td>
+                <td style="text-align:center;">{{ product.timeofresponse }}</td>
+                <td style="text-align:center;">{{ product.u_price }}</td>
+                <td style="text-align:center;">{{ product.t_price }}</td>
+                <td style="text-align:center;">{{ product.description }}</td>
+
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+    <br>
+<form action="/order_for_producer" method="post">
+    <div class="col-sm-6 mb-3 mb-sm-0"><label for="required_product_Id">Required Product Id</label>
+        <input id="required_product_Id" type="text" name="name" value="{{data.id}}" class="form-control form-control-user" readonly>
+    </div>
+    <div class="col-sm-6 mb-3 mb-sm-0"><label for="u_priceId">Unit Price</label>
+        <input id="u_priceId" type="text" name="u_price" value="{{data.u_price}}" class="form-control form-control-user" ></div>
+
+    <div class="col-sm-6 mb-3 mb-sm-0"><label for="t_priceId">Total Price</label>
+        <input id="t_priceId" type="text" name="t_price" value="{{data.t_price}}" class="form-control form-control-user"></div>
+    <div class="profile-input"><label for="descriptionId">Description</label>
+        <input id="descriptionId" type="text" name="description" value="{{data.description}}" class="form-control form-control-user"></div>
+    <br>
+    <input class="btn btn-primary btn-user btn-block" type="submit" value="registered">
+</form>
+{% endblock %}
+
+{% block myScript %}
+<script src="assets/js/required_product.js"></script>
+{% endblock %}
