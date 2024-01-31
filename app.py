@@ -170,7 +170,7 @@ def order_producer():
             requiredproduct_id = session.get('item_id').requiredproduct_id
             producer_id = session.get('id')
             id = session.get('item_id').id
-            CallPriceController.edit_for_roducer(id, requiredproduct_id, u_price, t_price, description, producer_id)
+            CallPriceController.edit_for_producer(id, requiredproduct_id, u_price, t_price, description, producer_id)
             session['item_id'] = None
             return render_template("order_for_producer.html",
                                    products=CallPriceController.find_by_producer_id(session.get('id')),
