@@ -1,5 +1,5 @@
 # model/entity/profile.py
-from sqlalchemy import Column, Integer, String, ForeignKey, Float, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Boolean, DateTime
 from sqlalchemy.orm import relationship
 from model.entity.base import Base
 
@@ -31,6 +31,7 @@ class RequiredProduct(Base):
     ManufacturerFa = Column(String(50))
     Manufacturer = Column(String(30))
     ModelLabel = Column(String(30))
+    AcquisitionDatePlanned = Column(DateTime)
     status = Column(Boolean)
     description = Column(String(300))
 
@@ -39,7 +40,7 @@ class RequiredProduct(Base):
     callprice_r = relationship("CallPrice", back_populates="requiredproduct_r")
 
     def __init__(self, projectclient_id, omniclass_code, count, Color, Height, Length, Width, Depth, Thickness,
-                 Material, Weight, ManufacturerFa, Manufacturer, ModelLabel, description=None, status=False):
+                 Material, Weight, ManufacturerFa, Manufacturer, ModelLabel,AcquisitionDatePlanned, description=None, status=False):
         super().__init__()
         self.projectclient_id = projectclient_id
         self.omniclass_code = omniclass_code
@@ -57,3 +58,4 @@ class RequiredProduct(Base):
         self.ModelLabel = ModelLabel
         self.description = description
         self.status = status
+        self.AcquisitionDatePlanned = AcquisitionDatePlanned
