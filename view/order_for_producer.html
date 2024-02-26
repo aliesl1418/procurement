@@ -21,7 +21,7 @@ Order
             <thead class = 'fa-book-font'>
             <tr>
 
-                <th style="text-align:center;">Id</th>
+                <th style="text-align:center;">Number</th>
                 <th style="text-align:center;">requiredproduct_id</th>
                 <th style="text-align:center;">Order status</th>
                 <th style="text-align:center;">Edit</th>
@@ -35,7 +35,7 @@ Order
 
             {% for product in products %}
 
-                <td style="text-align:center;">{{ product.id }}</td>
+                <td style="text-align:center;">{{ loop.index }}</td>
                 <td style="text-align:center;">{{ product.requiredproduct_id}}</td>
                 <td style="text-align:center;">
                     <input type="checkbox" class="form-check-input" {{ 'checked' if product.status else '' }} disabled>

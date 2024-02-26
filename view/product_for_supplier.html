@@ -21,7 +21,7 @@ Products for pricing
             <thead class = 'fa-book-font'>
             <tr>
 
-                <th style="text-align:center;">Id</th>
+                <th style="text-align:center;">Number</th>
                 <th style="text-align:center;">ProjectClient_id</th>
                 <th style="text-align:center;">Pricing</th>
                 <th style="text-align:center;">Product code</th>
@@ -44,7 +44,7 @@ Products for pricing
 
             {% for product in products %}
 
-                <td style="text-align:center;">{{ product.id }}</td>
+                <td style="text-align:center;">{{ loop.index }}</td>
                 <td style="text-align:center;">{{ product.projectclient_id }}</td>
                 <td style="text-align:center;">
                     <form method="GET">

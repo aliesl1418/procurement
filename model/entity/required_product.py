@@ -31,7 +31,7 @@ class RequiredProduct(Base):
     ManufacturerFa = Column(String(50))
     Manufacturer = Column(String(30))
     ModelLabel = Column(String(30))
-    AcquisitionDatePlanned = Column(DateTime)
+    AcquisitionDatePlanned = Column(String(30))
     status = Column(Boolean)
     description = Column(String(300))
 

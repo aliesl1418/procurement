@@ -21,18 +21,22 @@ Products
         <br>
         <form method="GET">
            <label class="custom-control-label" for="quantity">Add quantity</label>
-           <input type="submit" value="Done" class="btn-outline-secondary" id="quantity">
+           <input type="submit" value="Done" class="btn btn-secondary" id="quantity">
         </form>
         <br>
         <table class="table table-primary table-hover">
             <thead class = 'fa-book-font'>
             <tr>
-                <th style="text-align:center;">Id</th>
+                <th style="text-align:center;">Number</th>
                 <th style="text-align:center;">ProjectClient_id</th>
                 <th style="text-align:center;">status</th>
                 <th style="text-align:center;">Call for price</th>
+                <th style="text-align:center;">Edit</th>
                 <th style="text-align:center;">Product code</th>
                 <th style="text-align:center;">Count</th>
+                <th style="text-align:center;">Model label</th>
+                <th style="text-align:center;">Manufacturer(Persian name)</th>
+                <th style="text-align:center;">AcquisitionDatePlanned</th>
                 <th style="text-align:center;">Color</th>
                 <th style="text-align:center;">Height</th>
                 <th style="text-align:center;">Length</th>
@@ -41,15 +45,13 @@ Products
                 <th style="text-align:center;">Thickness</th>
                 <th style="text-align:center;">Product Material</th>
                 <th style="text-align:center;">Weight</th>
-                <th style="text-align:center;">Manufacturer(Persian name)</th>
                 <th style="text-align:center;">Manufacturer(English name)</th>
-                <th style="text-align:center;">Model label</th>
                 <th style="text-align:center;">Description</th>
             </thead>
             <tbody>
 
             {% for product in products %}
-                <td style="text-align:center;">{{ product.id }}</td>
+                <td style="text-align:center;">{{ loop.index }}</td>
                 <td style="text-align:center;">{{ product.projectclient_id }}</td>
                 <td style="text-align:center;">
                     <input type="checkbox" class="form-check-input" {{ 'checked' if product.status else '' }} disabled>
@@ -60,8 +62,14 @@ Products
                         <input type="submit" value="Call for price" class="btn btn-primary">
                     </form>
                 </td>
+                <td style="text-align:center;">
+                    <input type="submit" value="Edit" class="btn btn-danger">
+                </td>
                 <td style="text-align:center;">{{ product.omniclass_code }}</td>
                 <td style="text-align:center;">{{ product.count }}</td>
+                <td style="text-align:center;">{{ product.ModelLabel }}</td>
+                <td style="text-align:center;">{{ product.ManufacturerFa }}</td>
+                <td style="text-align:center;">{{ product.AcquisitionDatePlanned }}</td>
                 <td style="text-align:center;">{{ product.Color }}</td>
                 <td style="text-align:center;">{{ product.Height }}</td>
                 <td style="text-align:center;">{{ product.Length }}</td>
@@ -70,9 +78,7 @@ Products
                 <td style="text-align:center;">{{ product.Thickness }}</td>
                 <td style="text-align:center;">{{ product.Material }}</td>
                 <td style="text-align:center;">{{ product.Weight }}</td>
-                <td style="text-align:center;">{{ product.ManufacturerFa }}</td>
                 <td style="text-align:center;">{{ product.Manufacturer }}</td>
-                <td style="text-align:center;">{{ product.ModelLabel }}</td>
                 <td style="text-align:center;">{{ product.description }}</td>
                 </td>
             </tr>

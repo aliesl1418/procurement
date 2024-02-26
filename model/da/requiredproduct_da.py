@@ -35,12 +35,12 @@ class RequiredProductDa(DataBaseManager):
             change = RequiredProduct(entity.projectclient_id, entity.omniclass_code, entity.count, entity.Color,
                                      entity.Height, entity.Length, entity.Width, entity.Depth, entity.Thickness,
                                      entity.Material, entity.Weight, entity.ManufacturerFa, entity.Manufacturer,
-                                     entity.ModelLabel, status=True,description='Nothing')
+                                     entity.ModelLabel, entity.AcquisitionDatePlanned, status=True,description='Nothing')
         else:
             change = RequiredProduct(entity.projectclient_id, entity.omniclass_code, entity.count, entity.Color,
                                      entity.Height, entity.Length, entity.Width, entity.Depth, entity.Thickness,
                                      entity.Material, entity.Weight, entity.ManufacturerFa, entity.Manufacturer,
-                                     entity.ModelLabel, status=False,description='Nothing')
+                                     entity.ModelLabel, entity.AcquisitionDatePlanned, status=False,description='Nothing')
         change.id = entity.id
         self.session.merge(change)
         self.session.commit()

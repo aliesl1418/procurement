@@ -10,11 +10,11 @@ from controller.producer_productclass_controller import ProducerProductClassCont
 class RequiredProductController:
     @classmethod
     def save(cls, projectclient_id, omniclass_code, count, Color, Height, Length, Width, Depth, Thickness,
-             Material, Weight, ManufacturerFa, Manufacturer, ModelLabel, description=None, status=False):
+             Material, Weight, ManufacturerFa, Manufacturer, ModelLabel, AcquisitionDatePlanned,description=None, status=False):
         try:
             products = RequiredProduct(projectclient_id, omniclass_code, count, Color, Height, Length, Width, Depth,
                                        Thickness,
-                                       Material, Weight, ManufacturerFa, Manufacturer, ModelLabel, description=None,
+                                       Material, Weight, ManufacturerFa, Manufacturer, ModelLabel,AcquisitionDatePlanned, description=None,
                                        status=False)
             da = RequiredProductDa()
             return True, da.save(products)
@@ -23,11 +23,11 @@ class RequiredProductController:
 
     @classmethod
     def edit(cls, projectclient_id, omniclass_code, count, Color, Height, Length, Width, Depth, Thickness,
-             Material, Weight, ManufacturerFa, Manufacturer, ModelLabel, description=None, status=False):
+             Material, Weight, ManufacturerFa, Manufacturer, ModelLabel, AcquisitionDatePlanned,description=None, status=False):
         try:
             products = RequiredProduct(projectclient_id, omniclass_code, count, Color, Height, Length, Width, Depth,
                                        Thickness,
-                                       Material, Weight, ManufacturerFa, Manufacturer, ModelLabel, description=None,
+                                       Material, Weight, ManufacturerFa, Manufacturer, ModelLabel,AcquisitionDatePlanned, description=None,
                                        status=False)
             da = RequiredProductDa()
             return True, da.edit(products)

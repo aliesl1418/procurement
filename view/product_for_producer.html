@@ -21,11 +21,13 @@ Products for pricing
             <thead class = 'fa-book-font'>
             <tr>
 
-                <th style="text-align:center;">Id</th>
+                <th style="text-align:center;">Number</th>
                 <th style="text-align:center;">ProjectClient_id</th>
                 <th style="text-align:center;">Pricing</th>
                 <th style="text-align:center;">Product code</th>
                 <th style="text-align:center;">Count</th>
+                <th style="text-align:center;">Model label</th>
+                <th style="text-align:center;">AcquisitionDatePlanned</th>
                 <th style="text-align:center;">Color</th>
                 <th style="text-align:center;">Height</th>
                 <th style="text-align:center;">Length</th>
@@ -36,7 +38,6 @@ Products for pricing
                 <th style="text-align:center;">Weight</th>
                 <th style="text-align:center;">Manufacturer(Persian name)</th>
                 <th style="text-align:center;">Manufacturer(English name)</th>
-                <th style="text-align:center;">Model label</th>
                 <th style="text-align:center;">Description</th>
 
             </thead>
@@ -44,7 +45,7 @@ Products for pricing
 
             {% for product in products %}
 
-                <td style="text-align:center;">{{ product.id }}</td>
+                <td style="text-align:center;">{{ loop.index }}</td>
                 <td style="text-align:center;">{{ product.projectclient_id }}</td>
                 <td style="text-align:center;">
                     <form method="GET">
@@ -54,6 +55,8 @@ Products for pricing
                 </td>
                 <td style="text-align:center;">{{ product.omniclass_code }}</td>
                 <td style="text-align:center;">{{ product.count }}</td>
+                <td style="text-align:center;">{{ product.ModelLabel }}</td>
+                <td style="text-align:center;">{{ product.AcquisitionDatePlanned }}</td>
                 <td style="text-align:center;">{{ product.Color }}</td>
                 <td style="text-align:center;">{{ product.Height }}</td>
                 <td style="text-align:center;">{{ product.Length }}</td>
@@ -64,7 +67,6 @@ Products for pricing
                 <td style="text-align:center;">{{ product.Weight }}</td>
                 <td style="text-align:center;">{{ product.ManufacturerFa }}</td>
                 <td style="text-align:center;">{{ product.Manufacturer }}</td>
-                <td style="text-align:center;">{{ product.ModelLabel }}</td>
                 <td style="text-align:center;">{{ product.description }}</td>
 
 
